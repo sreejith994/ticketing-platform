@@ -1,4 +1,4 @@
-package com.ss.tickets.domain.user;
+package com.ss.tickets.domain.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;

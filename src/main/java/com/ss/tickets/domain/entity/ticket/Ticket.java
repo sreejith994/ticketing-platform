@@ -1,7 +1,7 @@
-package com.ss.tickets.domain.ticket;
+package com.ss.tickets.domain.entity.ticket;
 
-import com.ss.tickets.domain.qrcode.QrCode;
-import com.ss.tickets.domain.user.Attendee;
+import com.ss.tickets.domain.entity.qrcode.QrCode;
+import com.ss.tickets.domain.entity.user.Attendee;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

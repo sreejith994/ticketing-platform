@@ -1,0 +1,1 @@
+alter table ticket_types add column description varchar(255);

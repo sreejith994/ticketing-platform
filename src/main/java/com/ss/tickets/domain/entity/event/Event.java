@@ -1,9 +1,9 @@
-package com.ss.tickets.domain.event;
+package com.ss.tickets.domain.entity.event;
 
-import com.ss.tickets.domain.ticket.TicketType;
-import com.ss.tickets.domain.user.Attendee;
-import com.ss.tickets.domain.user.Organizer;
-import com.ss.tickets.domain.user.Staff;
+import com.ss.tickets.domain.entity.ticket.TicketType;
+import com.ss.tickets.domain.entity.user.Attendee;
+import com.ss.tickets.domain.entity.user.Organizer;
+import com.ss.tickets.domain.entity.user.Staff;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -36,10 +36,10 @@ public class Event {
     private String name;
 
     @Column(name = "start")
-    private LocalDate start;
+    private LocalDateTime start;
 
     @Column(name = "end")
-    private LocalDate end;
+    private LocalDateTime end;
 
     @Column(name = "venue", nullable = false)
     private String venue;
@@ -64,7 +64,7 @@ public class Event {
     @ManyToMany(mappedBy = "staffingEvents")
     private List<Staff> staff = new ArrayList<>();
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.PERSIST)
     private List<TicketType> ticketTypes = new ArrayList<>();
 
     @CreatedDate

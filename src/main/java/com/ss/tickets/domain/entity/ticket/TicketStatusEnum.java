@@ -1,4 +1,4 @@
-package com.ss.tickets.domain.ticket;
+package com.ss.tickets.domain.entity.ticket;
 
 public enum TicketStatusEnum {
     PURCHASED, CANCELLED

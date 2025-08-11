@@ -1,6 +1,6 @@
-package com.ss.tickets.domain.ticket;
+package com.ss.tickets.domain.entity.ticket;
 
-import com.ss.tickets.domain.event.Event;
+import com.ss.tickets.domain.entity.event.Event;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,6 +34,9 @@ public class TicketType {
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "total_available")
     private int totalAvailable;
