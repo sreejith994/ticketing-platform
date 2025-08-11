@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Organizer extends User {
 
     @OneToMany(mappedBy = "organizer")
