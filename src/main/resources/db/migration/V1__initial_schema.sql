@@ -58,3 +58,53 @@ CREATE TABLE user_attending_events (
                                        CONSTRAINT fk_user_attend_event_event FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
+
+
+CREATE TABLE ticket_types (
+                              id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                              name VARCHAR(255) NOT NULL,
+                              price NUMERIC(19, 2) NOT NULL,
+                              total_available INT,
+                              event_id UUID,
+                              created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+                              updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+
+                              CONSTRAINT fk_ticket_types_event FOREIGN KEY (event_id) REFERENCES events(id)
+);
+
+
+CREATE TABLE tickets (
+                         id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                         status VARCHAR(50) NOT NULL,
+                         ticket_type_id UUID,
+                         purchaser_id UUID,
+                         created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+                         updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+
+                         CONSTRAINT fk_ticket_ticket_type FOREIGN KEY (ticket_type_id) REFERENCES ticket_types(id),
+                         CONSTRAINT fk_ticket_purchaser FOREIGN KEY (purchaser_id) REFERENCES attendees(id)
+);
+
+
+CREATE TABLE ticket_validation (
+                                   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                                   status VARCHAR(50) NOT NULL,
+                                   validation_method VARCHAR(50) NOT NULL,
+                                   ticket_id UUID,
+                                   created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+                                   updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+
+                                   CONSTRAINT fk_ticket_validation_ticket FOREIGN KEY (ticket_id) REFERENCES tickets(id)
+);
+
+
+CREATE TABLE qrcode (
+                        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                        status VARCHAR(50) NOT NULL,
+                        qr_code_value VARCHAR(255) NOT NULL,
+                        ticket_id UUID,
+                        created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+                        updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+
+                        CONSTRAINT fk_qrcode_ticket FOREIGN KEY (ticket_id) REFERENCES tickets(id)
+);

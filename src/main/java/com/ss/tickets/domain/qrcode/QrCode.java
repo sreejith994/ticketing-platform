@@ -1,5 +1,6 @@
-package com.ss.tickets.domain;
+package com.ss.tickets.domain.qrcode;
 
+import com.ss.tickets.domain.ticket.Ticket;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,27 +12,26 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ticket_validation")
+@Table(name = "qrcode")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class TicketValidation {
+public class QrCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name="id", updatable = false, nullable = false)
+    @Column(name="id",updatable = false,nullable = false)
     private UUID id;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TicketValidationStatusEnum status;
+    private QrCodeStatusEnum status;
 
-    @Column(name = "validation_method", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TicketValidationMethodEnum validationMethod;
+    @Column(name = "qr_code_value", nullable = false)
+    private String value;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
@@ -49,12 +49,13 @@ public class TicketValidation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TicketValidation that = (TicketValidation) o;
-        return Objects.equals(id, that.id) && status == that.status && Objects.equals(creationAt, that.creationAt) && Objects.equals(updatedAt, that.updatedAt);
+        QrCode qrCode = (QrCode) o;
+        return Objects.equals(id, qrCode.id) && status == qrCode.status && Objects.equals(value, qrCode.value) && Objects.equals(creationAt, qrCode.creationAt) && Objects.equals(updatedAt, qrCode.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, creationAt, updatedAt);
+        return Objects.hash(id, status, value, creationAt, updatedAt);
+
     }
 }

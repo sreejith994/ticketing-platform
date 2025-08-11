@@ -1,5 +1,6 @@
-package com.ss.tickets.domain;
+package com.ss.tickets.domain.user;
 
+import com.ss.tickets.domain.event.Event;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;

@@ -1,5 +1,9 @@
-package com.ss.tickets.domain;
+package com.ss.tickets.domain.event;
 
+import com.ss.tickets.domain.ticket.TicketType;
+import com.ss.tickets.domain.user.Attendee;
+import com.ss.tickets.domain.user.Organizer;
+import com.ss.tickets.domain.user.Staff;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -60,7 +64,7 @@ public class Event {
     @ManyToMany(mappedBy = "staffingEvents")
     private List<Staff> staff = new ArrayList<>();
 
-    @OneToMany(mappedBy = "events")
+    @OneToMany(mappedBy = "event")
     private List<TicketType> ticketTypes = new ArrayList<>();
 
     @CreatedDate
